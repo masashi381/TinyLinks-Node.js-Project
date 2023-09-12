@@ -47,10 +47,12 @@ _so that_ I can learn what content they like.
 ## Project Requirements
 
 - Express
-- EJS
+- HTML+CSS / EJS
 - FS module (read and write files)
 - Cookie Session (encrypted cookies)
 - Body Parser
+
+## Bonus
 - Bcrypt (password hashing)
 
 ### Site Header:
