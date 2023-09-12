@@ -70,6 +70,7 @@ if a user is not logged in, the header shows:
 ## Route Checklist
 
 ### GET `/`
+cookieをチェック
 
 if user is logged in:
 
@@ -82,7 +83,7 @@ if user is not logged in:
 ### GET `/urls`
 
 if user is logged in:
-
+myURLsを見せる
 - returns HTML with:
   - the site header (see Display Requirements above)
   - a list (or table) of URLs the user has created, each list item containing:
@@ -101,6 +102,9 @@ if user is not logged in:
 
 ### GET `/urls/new`
 
+create URL
+URLを作る
+
 if user is logged in:
 
 - returns HTML with:
@@ -115,6 +119,7 @@ if user is not logged in:
 
 ### GET `/urls/:id`
 
+短くしたURLの詳細（一つだけ取ってくる）
 if user is logged in and owns the URL for the given ID:
 
 - returns HTML with:
@@ -150,19 +155,22 @@ if URL for the given ID does not exist:
 - returns HTML with a relevant error message
 
 ### POST `/urls`
+create URL(submit)
 
 if user is logged in:
 
 - generates a short URL (random string with 6 alpha numeric characters), saves it, and associates it with the user
 - updates the `urls.json` file
+  
 - redirects to `/urls/:id`, where :id matches the ID of the newly saved URL
+※submitするとその短くしたURLのページにとぶ
 
 if user is not logged in:
 
 - returns HTML with a relevant error message
 
-### POST `/urls/:id`
-
+### PUT `/urls/:id`
+編集ボタンが押された時
 if user is logged in and owns the URL for the given ID:
 
 - updates the URL
@@ -177,7 +185,7 @@ if user is logged it but does not own the URL for the given ID:
 
 - returns HTML with a relevant error message
 
-### POST `/urls/:id/delete`
+### DELETE `/urls/:id/delete`
 
 if user is logged in and owns the URL for the given ID:
 
@@ -205,7 +213,7 @@ if user is logged in:
   - submit button that makes a POST request to /login
 
 ### GET `/register`
-
+ページにアクセス
 if user is logged in:
 
 - redirects to /urls
@@ -218,7 +226,7 @@ if user is not logged in:
   - a register button that makes a POST request to /register
 
 ### POST `/login`
-
+JSONと比較して認証
 if email and password params match an existing user:
 
 - sets a cookie
