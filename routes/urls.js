@@ -1,18 +1,22 @@
 import express from 'express';
 const urlRouter = express.Router();
 
+//show my URLs page
 urlRouter.get('/', (req, res) => {
   res.render('urls');
 });
 
-urlRouter.post('/', (req, res) => {
-  console.log('post');
-});
-
+//show create new URL page
 urlRouter.get('/new', (req, res) => {
   res.render('newUrl');
 });
 
+//submit new URL
+urlRouter.post('/', (req, res) => {
+  console.log('post');
+});
+
+//show single URL page
 urlRouter.get('/:id', (req, res) => {
   res.render('singleUrl');
 });
@@ -20,11 +24,16 @@ urlRouter.get('/:id', (req, res) => {
 //??
 urlRouter.get('/u/:id', (req, res) => {});
 
-urlRouter.put('/:id', (req, res) => {
+// PUTとDELETEのmethodがhtmlに存在しないため、
+// GETとPOSTで書き換えが必要
+
+//edit URL
+urlRouter.post('/:id', (req, res) => {
   console.log('edited');
 });
 
-urlRouter.get('/:id/delete', (req, res) => {
+//delete URL
+urlRouter.delete('/:id/delete', (req, res) => {
   console.log('deleted');
 });
 
