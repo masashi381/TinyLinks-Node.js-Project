@@ -6,7 +6,10 @@ import { SHORT_URL_LENGTH } from '../constants/urls.js';
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
 export const createUrl = (req, res) => {
-  const { userID, url } = req.body;
+  const { userId, longUrl } = req.body;
+  if (!userId || !longUrl) {
+    return res.status(400).json({ error: 'userId and longUrl are required' });
+  }
   const shortUrl = randomstring.generate(SHORT_URL_LENGTH);
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -14,19 +17,19 @@ export const createUrl = (req, res) => {
       return res.status(500).json({ error: 'Internal Server Error' });
     }
     let jsonData = JSON.parse(data);
-    if (!jsonData[userID]) {
-      jsonData[userID] = {};
+    if (!jsonData[userId]) {
+      jsonData[userId] = {};
     }
-    jsonData[userID][shortUrl] = {
+    jsonData[userId][shortUrl] = {
       shortUrl,
-      longUrl: url,
+      longUrl,
     };
     fs.writeFile(filePath, JSON.stringify(jsonData), 'utf8', (err) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
-      res.json({ shortUrl });
+      res.redirect(`/urls/${shortUrl}`);
     });
   });
 };

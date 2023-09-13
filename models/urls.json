@@ -9,5 +9,12 @@
   },
   "abcdefgf": {
     "F8Oohn": { "shortUrl": "F8Oohn", "longUrl": "http://example.com" }
+  },
+  "test-user-id": {
+    "EAml2l": {
+      "shortUrl": "EAml2l",
+      "longUrl": "http://localhost:3001/urls/new"
+    },
+    "k8NX24": { "shortUrl": "k8NX24", "longUrl": "aaaa" }
   }
 }
