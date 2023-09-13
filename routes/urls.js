@@ -9,6 +9,7 @@ urlRouter.use(cookieParser());
 
 urlRouter.use((req, res, next) => {
   const userId = req.cookies.userId;
+  //DO NOT DELETE ↓
   // if (!userId) {
   //   return res.send('you need to login first to see your URL list');
   // }
@@ -42,10 +43,19 @@ urlRouter.get('/:id', (req, res) => {
 
 //URLをクリックした時にすぐに実際のURLに飛ぶのではなく、
 //validationを挟む、そのためのエンドポイント
-urlRouter.get('/u/:id', (req, res) => {});
+//validationの意味をなしているのか、、
+urlRouter.get('/u/:id', (req, res) => {
+  const urlId = req.params.id;
+  console.log(urlId);
+  // const userId = req.cookies.userId;
+  const userId = '12345667';
+  const exsistUrl = urlData[userId].find((data) => data.shortUrl === urlId);
+  if (!exsistUrl) {
+    return res.send("This shorten URL doesn't exsist");
+  }
 
-// PUTとDELETEのmethodがhtmlに存在しないため、
-// GETとPOSTで書き換えが必要
+  res.redirect(exsistUrl.longUrl);
+});
 
 //edit URL
 urlRouter.post('/:id', (req, res) => {

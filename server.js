@@ -12,6 +12,7 @@ server.use(cookieParser());
 
 server.get('/', (req, res) => {
   const userId = req.cookies.userid;
+  //DO NOT DELETE ↓
   // if (!userId) {
   //   return res.redirect('/login');
   // }

@@ -31,9 +31,11 @@
         <tbody>
           <% data.forEach(function(item) { %>
           <tr>
-            <td><%= item.shortUrl %></td>
             <td>
-              <a href="/urls/<%= item.shortUrl %>/edit" class="btn btn-primary"
+              <a href="/urls/u/<%= item.shortUrl %>"> <%= item.shortUrl %></a>
+            </td>
+            <td>
+              <a href="/urls/<%= item.shortUrl %>" class="btn btn-primary"
                 >Edit</a
               >
             </td>
