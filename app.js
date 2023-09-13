@@ -1,22 +1,12 @@
 import express from 'express';
-import urlRouter from './routes/urls.js';
 import dotenv from 'dotenv';
+import server from './server.js';
 
 //envファイル用
 dotenv.config();
 
-const app = express();
+const HOST = 'localhost';
 
-app.use(express.json());
-
-app.set('view engine', 'ejs');
-
-app.get('/', (req, res) => {
-  res.send('hello');
-});
-
-app.use('/urls', urlRouter);
-
-app.listen(process.env.PORT, () =>
-  console.log(`server running on ${process.env.PORT}`),
+server.listen(process.env.PORT, HOST, () =>
+  console.log(`server running on HTTP://${HOST}:${process.env.PORT}`),
 );
