@@ -1,10 +1,28 @@
 import express from 'express';
 import { createUrl } from '../controllers/urls.js';
+import cookieParser from 'cookie-parser';
+import urlData from '../models/urls.json' assert { type: 'json' };
+
 const urlRouter = express.Router();
+
+urlRouter.use(cookieParser());
+
+urlRouter.use((req, res, next) => {
+  const userId = req.cookies.userId;
+  // if (!userId) {
+  //   return res.send('you need to login first to see your URL list');
+  // }
+  console.log(urlData);
+  console.log(userId);
+  next();
+});
 
 //show my URLs page
 urlRouter.get('/', (req, res) => {
-  res.render('urls');
+  const userId = req.cookies.userId;
+  // const data = urlData[userId];
+  const data = urlData[12345667];
+  res.render('urls', { data: data });
 });
 
 //show create new URL page
@@ -22,7 +40,8 @@ urlRouter.get('/:id', (req, res) => {
   res.render('singleUrl');
 });
 
-//??
+//URLをクリックした時にすぐに実際のURLに飛ぶのではなく、
+//validationを挟む、そのためのエンドポイント
 urlRouter.get('/u/:id', (req, res) => {});
 
 // PUTとDELETEのmethodがhtmlに存在しないため、
