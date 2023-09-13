@@ -13,8 +13,7 @@ urlRouter.use((req, res, next) => {
   // if (!userId) {
   //   return res.send('you need to login first to see your URL list');
   // }
-  console.log(urlData);
-  console.log(userId);
+  // console.log(userId);
   next();
 });
 
@@ -53,7 +52,6 @@ urlRouter.get('/u/:id', (req, res) => {
   if (!exsistUrl) {
     return res.send("This shorten URL doesn't exsist");
   }
-
   res.redirect(exsistUrl.longUrl);
 });
 
@@ -63,8 +61,19 @@ urlRouter.post('/:id', (req, res) => {
 });
 
 //delete URL
-urlRouter.delete('/:id/delete', (req, res) => {
-  console.log('deleted');
+urlRouter.post('/:id/delete', (req, res) => {
+  // const userId = req.cookies.userId;
+  // const itemId = req.params.id;
+  const userId = '12345667';
+  const itemId = 'DKCz0d';
+  const data = urlData[userId];
+
+  //おそらく修正必要
+  if (data) {
+    const deleteItemIndex = data.findIndex((data) => data.shortUrl === itemId);
+    delete data[deleteItemIndex];
+    res.redirect('/urls');
+  }
 });
 
 export default urlRouter;

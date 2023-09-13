@@ -40,13 +40,9 @@
               >
             </td>
             <td>
-              <button
-                action="/urls/<%= item.shortUrl %>/delete"
-                method="delete"
-                class="btn btn-danger"
-              >
-                Delete
-              </button>
+              <form action="/urls/<%= item.shortUrl %>/delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
             </td>
           </tr>
           <% }); %>
