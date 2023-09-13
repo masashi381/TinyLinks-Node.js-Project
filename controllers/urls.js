@@ -1,11 +1,9 @@
 import fs from 'fs';
-import path from 'node:path';
-import url from 'node:url';
+import path from 'path';
 import randomstring from 'randomstring';
 import { SHORT_URL_LENGTH } from '../constants/urls.js';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const filePath = path.join(__dirname, '../models/urls.json');
+const filePath = path.join(path.resolve(), '/models/urls.json');
 
 export const createUrl = (req, res) => {
   const { userID, url } = req.body;
