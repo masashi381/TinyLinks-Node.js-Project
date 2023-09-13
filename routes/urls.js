@@ -1,4 +1,5 @@
 import express from 'express';
+import { createUrl } from '../controllers/urls.js';
 const urlRouter = express.Router();
 
 //show my URLs page
@@ -13,7 +14,7 @@ urlRouter.get('/new', (req, res) => {
 
 //submit new URL
 urlRouter.post('/', (req, res) => {
-  console.log('post');
+  createUrl(req, res);
 });
 
 //show single URL page

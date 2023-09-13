@@ -1,15 +1,9 @@
-
- "userID": {
-    {
-  "fds9qW": {
-    "shortUrl": "fds9qW",
-    "longUrl": "http://www.google.com"
-    
+{
+  "abcdefg": {
+    "fds9qW": { "shortUrl": "fds9qW", "longUrl": "http://www.google.com" },
+    "b6Fd1r": { "shortUrl": "b6Fd1r", "longUrl": "http://www.facebook.com" }
   },
-  "b6Fd1r": {
-    "shortUrl": "b6Fd1r",
-    "longUrl": "http://www.facebook.com"
+  "fds9qW": {
+    "WBq0l1": { "shortUrl": "WBq0l1", "longUrl": "http://example.com" }
   }
 }
-
-  }
