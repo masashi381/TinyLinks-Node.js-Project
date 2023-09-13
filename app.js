@@ -1,5 +1,6 @@
 import express from 'express';
 import urlRouter from './routes/urls.js';
+import authRoute from './routes/auth.js';
 import dotenv from 'dotenv';
 
 //envファイル用
@@ -14,7 +15,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/urls', urlRouter);
+app.use('/auth', authRoute);
 
-app.listen(process.env.PORT, () =>
-  console.log(`server running on ${process.env.PORT}`),
+const HOST = 'localhost';
+
+app.listen(process.env.PORT, HOST, () =>
+  console.log(`server running on HTTP://${HOST}:${process.env.PORT}`),
 );
