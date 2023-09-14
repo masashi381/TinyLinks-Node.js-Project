@@ -1,20 +1,5 @@
 {
-  "12345667": {
-    "DKCz0d": { "shortUrl": "DKCz0d", "longUrl": "http://ciccc.com" },
-    "mjOXLT": { "shortUrl": "mjOXLT", "longUrl": "http://ciccc.com" }
-  },
-  "abcdefg": {
-    "fds9qW": { "shortUrl": "fds9qW", "longUrl": "http://www.google.com" },
-    "b6Fd1r": { "shortUrl": "b6Fd1r", "longUrl": "http://www.facebook.com" }
-  },
-  "abcdefgf": {
-    "F8Oohn": { "shortUrl": "F8Oohn", "longUrl": "http://example.com" }
-  },
-  "test-user-id": {
-    "EAml2l": {
-      "shortUrl": "EAml2l",
-      "longUrl": "http://localhost:3001/urls/new"
-    },
-    "k8NX24": { "shortUrl": "k8NX24", "longUrl": "aaaa" }
-  }
+  "test-user-id": [
+    { "shortUrl": "hw9YSC", "longUrl": "http://localhost:3001/urls/new1" }
+  ]
 }

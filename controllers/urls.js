@@ -16,14 +16,16 @@ export const createUrl = (req, res) => {
       console.error(err);
       return res.status(500).json({ error: 'Internal Server Error' });
     }
-    let jsonData = JSON.parse(data);
+    let jsonData = JSON.parse(data) || {};
     if (!jsonData[userId]) {
-      jsonData[userId] = {};
+      jsonData[userId] = [];
     }
-    jsonData[userId][shortUrl] = {
+    console.log(jsonData);
+    jsonData[userId].push({
       shortUrl,
       longUrl,
-    };
+    });
+    console.log(jsonData);
     fs.writeFile(filePath, JSON.stringify(jsonData), 'utf8', (err) => {
       if (err) {
         console.error(err);
