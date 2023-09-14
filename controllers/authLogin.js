@@ -1,5 +1,5 @@
 export const checkedLogin = (req, res) => {
-  // res.redirect('/urls');
+  res.redirect('/urls');
 };
 
 // post login info
