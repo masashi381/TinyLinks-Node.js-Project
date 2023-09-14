@@ -1,32 +1,39 @@
-import fs from 'fs';
 import path from 'path';
 import randomstring from 'randomstring';
 import { SHORT_URL_LENGTH } from '../constants/urls.js';
+import { readWriteFile, writeToFile, validateUrl } from '../helpers/utils.js';
 
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
 export const createUrl = (req, res) => {
-  const { userID, url } = req.body;
+  const { userId, longUrl } = req.body;
+
+  const validationResult = validateUrl(userId, longUrl);
+  if (!validationResult.valid) {
+    return res.status(400).json({ error: validationResult.error });
+  }
+
   const shortUrl = randomstring.generate(SHORT_URL_LENGTH);
-  fs.readFile(filePath, 'utf8', (err, data) => {
+
+  readWriteFile(filePath, (err, jsonData) => {
     if (err) {
-      console.error(err);
-      return res.status(500).json({ error: 'Internal Server Error' });
+      return res.status(500).json(err);
     }
-    let jsonData = JSON.parse(data);
-    if (!jsonData[userID]) {
-      jsonData[userID] = {};
+
+    if (!jsonData[userId]) {
+      jsonData[userId] = [];
     }
-    jsonData[userID][shortUrl] = {
+
+    jsonData[userId].push({
       shortUrl,
-      longUrl: url,
-    };
-    fs.writeFile(filePath, JSON.stringify(jsonData), 'utf8', (err) => {
+      longUrl,
+    });
+
+    writeToFile(filePath, jsonData, (err) => {
       if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return res.status(500).json(err);
       }
-      res.json({ shortUrl });
+      res.redirect(`/urls/${shortUrl}`);
     });
   });
 };
