@@ -1,7 +1,13 @@
 import express from 'express';
-const authRouter = express.Router();
+
 import authJson from '../models/users.json' assert { type: 'json' };
-import { v4 as uuidv4 } from 'uuid';
+const authRouter = express.Router();
+authRouter.use(express.json());
+import { registerUser } from '../controllers/auth.js';
+import { checkedLogin, loginUser } from '../controllers/authLogin.js';
+
+// console.log('test:', uuid);
+
 //show my login page
 authRouter.get('/', (req, res) => {
   res.send('Welcome');
@@ -9,19 +15,25 @@ authRouter.get('/', (req, res) => {
 
 //show login page
 authRouter.get('/login', (req, res) => {
-  res.render('login');
+  checkedLogin(req, res);
+});
+
+// make a POST request to /login
+authRouter.post('/login', (req, res) => {
+  loginUser(req, res);
+  res.send('login successful');
 });
 
 // show register page
 authRouter.get('/register', (req, res) => {
+  console.log('results:', authJson);
   res.render('register');
 });
 
+// make a POST request to /register
 authRouter.post('/register', (req, res) => {
-  console.log(req.body);
-  res.send('form works');
+  // res.send('form works');
+  registerUser(req, res);
 });
 
-const test = uuidv4();
-console.log('test:', test);
 export default authRouter;
