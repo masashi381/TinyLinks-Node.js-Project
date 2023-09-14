@@ -1,14 +1,16 @@
 {
-  "12345667": {
-    "DKCz0d": { "shortUrl": "DKCz0d", "longUrl": "http://ciccc.com" },
-    "mjOXLT": { "shortUrl": "mjOXLT", "longUrl": "http://ciccc.com" }
-  },
-  "abcdefg": {
-    "fds9qW": { "shortUrl": "fds9qW", "longUrl": "http://www.google.com" },
-    "b6Fd1r": { "shortUrl": "b6Fd1r", "longUrl": "http://www.facebook.com" }
-  },
-  "abcdefgf": {
-    "F8Oohn": { "shortUrl": "F8Oohn", "longUrl": "http://example.com" }
-  },
-  "undefined": { "0wMPNJ": { "shortUrl": "0wMPNJ" } }
+  "12345667": [
+    { "shortUrl": "DKCz0d", "longUrl": "http://ciccc.com" },
+    { "shortUrl": "mjOXLT", "longUrl": "http://ciccc.com" }
+  ],
+  "abcdefg": [
+    { "shortUrl": "fds9qW", "longUrl": "http://www.google.com" },
+    { "shortUrl": "b6Fd1r", "longUrl": "http://www.facebook.com" }
+  ],
+  "abcdefgf": [{ "shortUrl": "F8Oohn", "longUrl": "http://example.com" }],
+  "undefined": [
+    { "shortUrl": "KRH2pA" },
+    { "shortUrl": "JSFcQM" },
+    { "shortUrl": "eFn9Qn" }
+  ]
 }
