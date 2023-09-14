@@ -4,19 +4,18 @@ import authJson from '../models/users.json' assert { type: 'json' };
 const authRouter = express.Router();
 authRouter.use(express.json());
 import { registerUser } from '../controllers/auth.js';
-import { loginUser } from '../controllers/authLogin.js';
+import { checkedLogin, loginUser } from '../controllers/authLogin.js';
 
 // console.log('test:', uuid);
 
 //show my login page
 authRouter.get('/', (req, res) => {
-  // res.send('Welcome');
-  res.send(authJson);
+  res.send('Welcome');
 });
 
 //show login page
 authRouter.get('/login', (req, res) => {
-  res.render('login');
+  checkedLogin(req, res);
 });
 
 // make a POST request to /login

@@ -1,9 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
+import cookieSession from 'cookie-session';
 import authJson from '../models/users.json' assert { type: 'json' };
+import server from '../server.js';
 
 //register users (post request)
 export const registerUser = (req, res) => {
   const uuid = uuidv4();
+
   if (req.body.name === '') {
     console.log('Please enter name');
     // alert('Please enter name');
@@ -26,5 +29,13 @@ export const registerUser = (req, res) => {
     console.log('newUser', newUserObject);
     authJson[newUserObject];
     res.send(newUserObject);
+
+    // cookie settings
+    server.use(
+      cookieSession({
+        name: [uuid],
+        keys: [email, password],
+      }),
+    );
   }
 };

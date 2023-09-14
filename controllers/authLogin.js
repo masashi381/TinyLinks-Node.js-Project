@@ -1,3 +1,7 @@
+export const checkedLogin = (req, res) => {
+  // res.redirect('/urls');
+};
+
 // post login info
 export const loginUser = (req, res) => {
   if (req.body.email === '') {
