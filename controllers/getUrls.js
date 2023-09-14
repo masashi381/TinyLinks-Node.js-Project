@@ -13,9 +13,9 @@ export const getUrls = (req, res) => {
     }
 
     if (!jsonData[userId]) {
-      jsonData[userId] = [];
+      jsonData[userId] = []; //returnいる？
     }
 
-    return res.render('urls', { data: jsonData[userId] });
+    res.render('urls', { data: jsonData[userId] });
   });
 };

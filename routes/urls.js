@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import urlData from '../models/urls.json' assert { type: 'json' };
 import { getUrls } from '../controllers/getUrls.js';
 import { checkUrlExsistance } from '../controllers/checkUrlExsistance.js';
+import { deleteUrl } from '../controllers/deleteUrl.js';
 
 const urlRouter = express.Router();
 
@@ -51,18 +52,7 @@ urlRouter.post('/:id', (req, res) => {
 
 //delete URL
 urlRouter.post('/:id/delete', (req, res) => {
-  // const userId = req.cookies.userId;
-  // const itemId = req.params.id;
-  const userId = '12345667';
-  const itemId = 'DKCz0d';
-  const data = urlData[userId];
-
-  //おそらく修正必要
-  if (data) {
-    const deleteItemIndex = data.findIndex((data) => data.shortUrl === itemId);
-    delete data[deleteItemIndex];
-    res.redirect('/urls');
-  }
+  deleteUrl(req, res);
 });
 
 export default urlRouter;
