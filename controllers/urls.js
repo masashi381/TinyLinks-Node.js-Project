@@ -1,7 +1,7 @@
 import path from 'path';
-import randomstring from 'randomstring';
 import { SHORT_URL_LENGTH } from '../constants/urls.js';
-import { readWriteFile, writeToFile, validateUrl } from '../helpers/utils.js';
+import { readWriteFile, writeToFile } from '../helpers/utils.js';
+import { validateUrl, makeShortUrl } from '../helpers/urls.js';
 
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
@@ -13,7 +13,7 @@ export const createUrl = (req, res) => {
     return res.status(400).json({ error: validationResult.error });
   }
 
-  const shortUrl = randomstring.generate(SHORT_URL_LENGTH);
+  const shortUrl = makeShortUrl(SHORT_URL_LENGTH, filePath, userId);
 
   readWriteFile(filePath, (err, jsonData) => {
     if (err) {
@@ -52,7 +52,7 @@ export const updateUrl = (req, res) => {
       return res.status(500).json(err);
     }
 
-    const userUrls = jsonData[userId];
+    const userUrls = jsonData[userId] || [];
     const urlIndex = userUrls.findIndex((url) => url.shortUrl === shortUrl);
     if (urlIndex === -1) {
       return res.status(404).json({ error: 'URL not found' });
