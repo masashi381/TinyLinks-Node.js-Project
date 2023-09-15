@@ -25,7 +25,9 @@ export const deleteUrl = (req, res) => {
 
     // if it returns -1 that means failed finding index
     if (deleteItemIndex === -1) {
-      return res.send('URL not found');
+      return res.render('error', {
+        errorMessage: 'Cannnot find URL you wish to delete..',
+      });
     }
 
     // remove specific item from data
@@ -35,7 +37,6 @@ export const deleteUrl = (req, res) => {
     jsonData[userId] = data;
 
     writeToFile(filePath, jsonData, (err) => {
-      console.log(data);
       if (err) {
         return res.status(500).json(err);
       }
