@@ -20,14 +20,43 @@
       </div>
       <div>
         <h5>Edit</h5>
-        <form method="post" action="/urls/:id">
+        <form
+          method="post"
+          action="/urls/<%= id %> "
+          onsubmit="
+            return validateForm();
+          "
+        >
           <label for="updatedUrl">New URL:</label>
-          <input type="text" placeholder="Input the new URL" />
+          <input
+            type="text"
+            id="longUrl"
+            name="longUrl"
+            placeholder="Input the new URL"
+          />
+          <input type="hidden" name="userId" value="12345667" />
           <button type="submit" class="btn btn-primary">Edit</button>
         </form>
       </div>
       <div class="card-footer text-muted"></div>
     </div>
+    <script>
+      function validateForm() {
+        const longUrl = document.getElementById('longUrl').value;
+        const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:]+$/;
+        if (longUrl === '') {
+          alert('Please enter a URL.');
+          return false;
+        }
+
+        if (!urlPattern.test(longUrl)) {
+          alert('Please enter a valid URL.');
+          return false;
+        }
+
+        return true;
+      }
+    </script>
     <!-- Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
