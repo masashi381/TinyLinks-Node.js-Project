@@ -39,7 +39,6 @@
             placeholder="http://"
             style="width: 300px; margin: 1em"
           />
-          <input type="hidden" name="userId" value="test-user-id" />
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
@@ -47,7 +46,7 @@
     <script>
       function validateForm() {
         const longUrl = document.getElementById('longUrl').value;
-        const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:]+$/;
+        const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:\.]+$/;
         if (longUrl === '') {
           alert('Please enter a URL.');
           return false;
