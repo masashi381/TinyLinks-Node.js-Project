@@ -15,8 +15,8 @@
     <div class="card text-center">
       <div class="card-header"></div>
       <div class="card-body">
-        <h5 class="card-title">TinyURL for:</h5>
-        <p class="card-text">Short URL ID: <a></a></p>
+        <h5 class="card-title">TinyURL for: <%= longUrl %></h5>
+        <p class="card-text">Short URL ID: <%= id %><a></a></p>
       </div>
       <div>
         <h5>Edit</h5>
@@ -34,7 +34,6 @@
             name="longUrl"
             placeholder="Input the new URL"
           />
-          <input type="hidden" name="userId" value="12345667" />
           <button type="submit" class="btn btn-primary">Edit</button>
         </form>
       </div>

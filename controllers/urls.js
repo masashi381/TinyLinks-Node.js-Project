@@ -6,7 +6,8 @@ import { validateUrl, makeShortUrl } from '../helpers/urls.js';
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
 export const createUrl = (req, res) => {
-  const { userId, longUrl } = req.body;
+  const { longUrl } = req.body;
+  const userId = '12345667';
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
@@ -41,8 +42,9 @@ export const createUrl = (req, res) => {
 };
 
 export const updateUrl = (req, res) => {
-  const { userId, longUrl } = req.body;
+  const { longUrl } = req.body;
   const shortUrl = req.params.id;
+  const userId = '12345667';
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
@@ -59,7 +61,6 @@ export const updateUrl = (req, res) => {
     const userUrls = jsonData[userId] || [];
     const urlIndex = userUrls.findIndex((url) => url.shortUrl === shortUrl);
     if (urlIndex === -1) {
-      // return res.status(404).json({ error: 'URL not found' });
       return res.status(404).render('error', {
         errorMessage: 'URL not found',
       });
@@ -72,6 +73,25 @@ export const updateUrl = (req, res) => {
         return res.status(500).json(err);
       }
       res.redirect(`/urls`);
+    });
+  });
+};
+
+export const getUrl = (req, res) => {
+  const shortUrl = req.params.id;
+  const userId = '12345667';
+
+  readWriteFile(filePath, (err, jsonData) => {
+    const userUrls = jsonData[userId] || [];
+    const urlIndex = userUrls.findIndex((url) => url.shortUrl === shortUrl);
+    if (urlIndex === -1) {
+      return res.status(404).render('error', {
+        errorMessage: 'URL not found',
+      });
+    }
+    res.render('singleUrl', {
+      id: req.params.id,
+      longUrl: userUrls[urlIndex].longUrl,
     });
   });
 };
