@@ -1,4 +1,5 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/D56eEpAT)
+
 # Mid Term Project - TinyLinks
 
 ## Goal
@@ -53,6 +54,7 @@ _so that_ I can learn what content they like.
 - Body Parser
 
 ## Bonus
+
 - Bcrypt (password hashing)
 
 ### Site Header:
@@ -70,6 +72,7 @@ if a user is not logged in, the header shows:
 ## Route Checklist
 
 ### GET `/`
+
 cookieをチェック
 
 if user is logged in:
@@ -84,6 +87,7 @@ if user is not logged in:
 
 if user is logged in:
 myURLsを見せる
+
 - returns HTML with:
   - the site header (see Display Requirements above)
   - a list (or table) of URLs the user has created, each list item containing:
@@ -155,21 +159,22 @@ if URL for the given ID does not exist:
 - returns HTML with a relevant error message
 
 ### POST `/urls`
+
 create URL(submit)
 
 if user is logged in:
 
 - generates a short URL (random string with 6 alpha numeric characters), saves it, and associates it with the user
 - updates the `urls.json` file
-  
 - redirects to `/urls/:id`, where :id matches the ID of the newly saved URL
-※submitするとその短くしたURLのページにとぶ
+  ※submitするとその短くしたURLのページにとぶ
 
 if user is not logged in:
 
 - returns HTML with a relevant error message
 
 ### PUT `/urls/:id`
+
 編集ボタンが押された時
 if user is logged in and owns the URL for the given ID:
 
@@ -205,7 +210,8 @@ if user is not logged in:
 if user is logged in:
 
 - redirects to /urls
-  if user is not logged in:
+
+if user is not logged in:
 
 - returns HTML with:
   - a form which contains:
@@ -213,7 +219,9 @@ if user is logged in:
   - submit button that makes a POST request to /login
 
 ### GET `/register`
+
 ページにアクセス
+
 if user is logged in:
 
 - redirects to /urls
@@ -226,7 +234,9 @@ if user is not logged in:
   - a register button that makes a POST request to /register
 
 ### POST `/login`
+
 JSONと比較して認証
+
 if email and password params match an existing user:
 
 - sets a cookie

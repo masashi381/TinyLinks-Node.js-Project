@@ -19,6 +19,7 @@
   </head>
 
   <body>
+    <%- include('partials/header') %>
     <main style="margin: 1em">
       <form action="/auth/login" method="POST">
         <div>
@@ -27,7 +28,7 @@
         </div>
         <div>
           <label for="password">Password</label>
-          <input type="password" name="password" />
+          <input type="password" name="current-password" />
         </div>
         <button type="submit">Login</button>
       </form>
