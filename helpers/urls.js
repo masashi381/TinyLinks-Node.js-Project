@@ -1,9 +1,9 @@
 import randomstring from 'randomstring';
 import { readWriteFile } from './utils.js';
 
-export const validateUrl = (userId, longUrl) => {
-  if (!userId || !longUrl) {
-    return { valid: false, error: 'userId and longUrl are required' };
+export const validateUrl = (longUrl) => {
+  if (!longUrl) {
+    return { valid: false, error: 'longUrl are required' };
   }
 
   const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:\.]+$/;
