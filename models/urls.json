@@ -1,11 +1,13 @@
 {
+  "12345667": [
+    { "shortUrl": "DKCz0d", "longUrl": "http://localhost:3001/urls/DKCz0d" },
+    { "shortUrl": "mjOXLT", "longUrl": "http://ciccc.ca" }
+  ],
   "test-user-id": [
-    { "shortUrl": "d1WN0I", "longUrl": "http://localhost:3001/urls/new" },
-    { "shortUrl": "Fxb1Mq", "longUrl": "http://localhost:3001/urls/new" },
-    { "shortUrl": "KFtcEp", "longUrl": "http://localhost:3001/urls/new" },
-    {
-      "shortUrl": "wR5FBc",
-      "longUrl": "https://github.com/michiru-dev/TinyLinks-Node.js-Project"
-    }
+    { "shortUrl": "TIR3gp", "longUrl": "http://localhost:3001/urls/new" },
+    { "shortUrl": "vHEUe9", "longUrl": "http://localhost:3001/urls/new" },
+    { "shortUrl": "dgcGQF", "longUrl": "http://localhost:3001/urls/new" },
+    { "shortUrl": "8vNTQ0", "longUrl": "http://localhost:3001/urls/new" },
+    { "shortUrl": "mj5Edc", "longUrl": "http://localhost:3001/urls/new" }
   ]
 }

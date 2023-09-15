@@ -12,9 +12,17 @@ export const checkUrlExsistance = (req, res) => {
     if (err) {
       return res.status(500).json(err);
     }
-    const exsistUrl = jsonData[userId].find((data) => data.shortUrl === urlId);
+    const data = jsonData[userId];
+    if (!data) {
+      return res.render('error', {
+        errorMessage: `Cannot find user ${userId}`,
+      });
+    }
+    const exsistUrl = data.find((data) => data.shortUrl === urlId);
     if (!exsistUrl) {
-      return res.send("This shorten URL doesn't exsist");
+      return res.render('error', {
+        errorMessage: "This shorten URL doesn't exsist!",
+      });
     }
     res.redirect(exsistUrl.longUrl);
   });

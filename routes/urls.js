@@ -14,7 +14,9 @@ urlRouter.use((req, res, next) => {
   const userId = req.cookies.userId;
   //DO NOT DELETE ↓
   // if (!userId) {
-  //   return res.send('you need to login first to see your URL list');
+  //   return res.render('error', {
+  //     errorMessage: 'you need to login first to see your URL list',
+  //   });
   // }
   // console.log(userId);
   next();

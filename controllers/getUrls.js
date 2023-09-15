@@ -12,10 +12,6 @@ export const getUrls = (req, res) => {
       return res.status(500).json(err);
     }
 
-    if (!jsonData[userId]) {
-      jsonData[userId] = []; //returnいる？
-    }
-
     res.render('urls', { data: jsonData[userId] });
   });
 };
