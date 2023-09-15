@@ -1,8 +1,8 @@
 {
   "12345667": [
-    { "shortUrl": "DKCz0d", "longUrl": "http://localhost:3001/urls/DKCz0d" },
-    { "shortUrl": "mjOXLT", "longUrl": "http://ciccc.ca" },
-    { "shortUrl": "bJ4Vc4", "longUrl": "http://localhost:3001/urls/newaaaa" }
+    { "shortUrl": "DKCz0d", "longUrl": "http://google.com" },
+    { "shortUrl": "mjOXLT", "longUrl": "http://google.com" },
+    { "shortUrl": "bJ4Vc4", "longUrl": "http://ciccc.ca" }
   ],
   "test-user-id": [
     { "shortUrl": "TIR3gp", "longUrl": "http://localhost:3001/urls/new" },
