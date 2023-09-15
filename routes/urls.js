@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUrl } from '../controllers/urls.js';
+import { createUrl, updateUrl } from '../controllers/urls.js';
 import cookieParser from 'cookie-parser';
 import urlData from '../models/urls.json' assert { type: 'json' };
 import { getUrls } from '../controllers/getUrls.js';
@@ -37,7 +37,7 @@ urlRouter.post('/', (req, res) => {
 
 //show single URL page
 urlRouter.get('/:id', (req, res) => {
-  res.render('singleUrl');
+  res.render('singleUrl', { id: req.params.id });
 });
 
 //check if the shortend url exsits in json before jumping to the actual page
@@ -48,6 +48,7 @@ urlRouter.get('/u/:id', (req, res) => {
 //edit URL
 urlRouter.post('/:id', (req, res) => {
   console.log('edited');
+  updateUrl(req, res);
 });
 
 //delete URL
