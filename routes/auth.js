@@ -1,116 +1,15 @@
-// import express from 'express';
-
-// import authJson from '../models/users.json' assert { type: 'json' };
-// const authRouter = express.Router();
-// authRouter.use(express.json());
-// import { registerUser } from '../controllers/auth.js';
-// import { checkedLogin, loginUser } from '../controllers/authLogin.js';
-
-// // set cookies
-
-// import { v4 as uuidv4 } from 'uuid';
-// import path from 'path';
-// import session from 'express-session';
-// import server from '../server.js';
-
-// // console.log('test:', uuid);
-
-// //show my login page
-// authRouter.get('/', (req, res) => {
-//   res.send('Welcome');
-// });
-
-// //show login page
-// authRouter.get('/login', (req, res) => {
-//   checkedLogin(req, res);
-// });
-
-// // make a POST request to /login
-// authRouter.post('/login', (req, res) => {
-//   loginUser(req, res);
-//   res.send('login successful');
-// });
-
-// // show register page
-// authRouter.get('/register', (req, res) => {
-//   console.log('results:', authJson);
-//   res.render('register');
-// });
-
-// // make a POST request to /register
-// authRouter.post('/register', (req, res) => {
-//   // res.send('form works');
-//   // registerUser(req, res);
-
-//   const uuid = uuidv4();
-//   // setCookie(req, res);
-//   // isAuthenticated(req, res);
-//   if (req.body.name === '') {
-//     console.log('Please enter name');
-//     // alert('Please enter name');
-//   } else if (req.body.email === '') {
-//     // res.send(alert('Please enter name'));
-//     console.log('Please enter email');
-//   } else if (req.body.password === '') {
-//     // res.send(alert('Please enter password'));
-//     console.log('Please enter password');
-//   } else {
-//     const newUser = {
-//       [uuid]: {
-//         name: req.body.name || '',
-//         email: req.body.email || '',
-//         password: req.body.password || '',
-//       },
-//     };
-//     const newUserString = JSON.stringify(newUser);
-//     const newUserObject = JSON.parse(newUserString);
-//     console.log('newUser', newUserObject);
-
-//     //set cookies
-//     // const { session } = pkg;
-//     server.use(
-//       session({
-//         secret: 'secret',
-//         resave: false,
-//         saveUninitialized: true,
-//         cookie: { maxAge: 24 * 60 * 60 * 1000 },
-//       }),
-//     );
-
-//     const isAuthenticated = (req, res, next) => {
-//       if (req.session[uuid]) {
-//         next();
-//       } else {
-//         next('route');
-//       }
-//     };
-
-//     req.session.regenerate((err) => {
-//       if (err) next(err);
-
-//       req.session[uuid] = req.body[uuid];
-
-//       req.session.save((err) => {
-//         if (err) {
-//           return next(err);
-//         } else {
-//           res.redirect('/login');
-//         }
-//       });
-//     });
-//   }
-// });
-
-// export default authRouter;
-
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import session from 'express-session';
 import path from 'path';
-import { readWriteFile, writeToFile, validateUrl } from '../helpers/utils.js';
-
+import { readWriteFile, writeToFile } from '../helpers/utils.js';
+// import {
+//   sessionConfig,
+//   registeredNewUsers,
+// } from '../controllers/authControllers.js';
 const authRouter = express.Router();
 const filePath = path.join(path.resolve(), '/models/users.json');
+
 // Session configuration
 authRouter.use(
   session({
@@ -120,20 +19,12 @@ authRouter.use(
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
   }),
 );
-
+// authRouter.use('./controllers/authController.js', sessionConfig());
 authRouter.use(express.json());
+authRouter.use(express.urlencoded({ extended: true }));
 
 // Create a new user with a UUID (Replace this with database logic)
 const uuid = uuidv4();
-// const newUser = {
-//   [uuid]: {
-//     id: uuid,
-//     name: '',
-//     email: '',
-//     password: '',
-//   },
-// };
-
 // Mock user data (Replace this with a database)
 const authJson = {
   [uuid]: {
@@ -146,43 +37,52 @@ const authJson = {
 // Middleware to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {
   if (req.session.userId) {
-    next();
+    return next();
   } else {
-    res.redirect('/login');
+    return res.redirect('/auth/login');
   }
 };
 
 // Show login page
-authRouter.get('/login', (req, res) => {
-  // res.send('Login Page');
-  res.render('login');
-});
+authRouter.get(
+  '/login',
+  /*isAuthenticated,*/ (req, res) => {
+    // res.send('Login Page');
+    res.render('login');
+  },
+);
 
 // Handle login
 authRouter.post('/login', (req, res) => {
   // Authenticate the user here, e.g., by checking credentials in a database
+
   const { email, password } = req.body;
-  // console.log('user: ', email, 'password: ', password);
-  console.log('req.body', req.body);
-  // Example of authentication (Replace with your logic)
-  // const user = authJson.find(
-  //   (u) => u.email === email && u.password === password,
-  // );
-  const user = {};
-  for (const property in authJson) {
-    if (property.email === email && property.password === password) {
-      return (user = property);
-    }
-  }
-  console.log('user: ', user);
-  if (user) {
-    // Store the user's ID in the session
-    req.session.userId = user.id; // Replace with your user ID field
-    // console.log(req.session.userId);
-    // res.send('Login Successful');
-    res.redirect('/urls');
+  console.log('inputed : ', req.body);
+  if (email === '' || password === '') {
+    return res.send('Please fill in all fields');
   } else {
-    res.send('Login Failed');
+    readWriteFile(filePath, (err, jsonData) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      if (!jsonData) {
+        jsonData = {};
+      }
+      const jsonDataArr = Object.values(jsonData);
+      console.log('jsonDataArr: ', jsonDataArr);
+
+      const user = jsonDataArr.find(
+        (user) => user.email === email && user.password === password,
+      );
+
+      if (user) {
+        // res.send('login success');
+        res.redirect('/urls');
+      } else {
+        res.send('login failed');
+      }
+    });
   }
 });
 
@@ -197,7 +97,7 @@ authRouter.post('/register', (req, res) => {
   const { name, email, password } = req.body;
   // Basic validation
   if (!name || !email || !password) {
-    res.send('Please fill in all fields');
+    return res.send('Please fill in all fields');
   } else {
     // Create a new user with a UUID (Replace this with database logic)
     const newUser = {
@@ -208,6 +108,7 @@ authRouter.post('/register', (req, res) => {
         password,
       },
     };
+    console.log('newUser: ', newUser);
 
     readWriteFile(filePath, (err, jsonData) => {
       if (err) {
@@ -228,17 +129,29 @@ authRouter.post('/register', (req, res) => {
         if (err) {
           return res.status(500).json(err);
         }
-        res.redirect('/urls');
+        // res.redirect('/urls');
+        req.session.regenerate((err) => {
+          if (err) {
+            return next(err);
+          } else {
+            req.session.user = newUser;
+            req.session.save((err) => {
+              if (err) {
+                return next(err);
+              }
+
+              return res.send('Registration Successful');
+            });
+          }
+        });
       });
     });
 
-    Object.assign(authJson, newUser);
+    // Object.assign(authJson, newUser);
     // authJson.push(newUser); // Push the new user to your user data
 
     // Store the user's ID in the session
-    req.session.id = newUser.id;
-    console.log('userId', req.session.id);
-    res.send('Registration Successful');
+
     // res.render('/urls');
   }
 });
