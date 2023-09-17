@@ -1,17 +1,8 @@
-import { v4 as uuidv4 } from 'uuid';
-import session from 'express-session';
-import { readWriteFile, writeToFile, validateUrl } from '../helpers/utils.js';
+import path from 'path';
+import { readWriteFile, writeToFile } from '../helpers/utils.js';
+import { uuid } from '../helpers/users.js';
 
-const uuid = uuidv4();
-
-export const sessionConfig = () => {
-  session({
-    secret: 'secret', // Replace with a strong secret, preferably from an environment variable
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
-  });
-};
+const filePath = path.join(path.resolve(), '/models/users.json');
 
 export const registeredNewUsers = (req, res) => {
   const { name, email, password } = req.body;
@@ -28,6 +19,7 @@ export const registeredNewUsers = (req, res) => {
         password,
       },
     };
+
     console.log('newUser: ', newUser);
 
     readWriteFile(filePath, (err, jsonData) => {
@@ -38,28 +30,47 @@ export const registeredNewUsers = (req, res) => {
       if (!jsonData) {
         jsonData = {};
       }
+      console.log('test');
 
+      // const jsonDataArr = Object.values(jsonData);
+      // const checkedUsers = Array.from(new Set(jsonDataArr));
+      // if (!checkedUsers) {
+      //   // console.log('checkedUsers', checkedUsers);
+      //   console.log('error', checkedUsers);
+      // } else {
+      // }
       Object.assign(jsonData, newUser);
 
       writeToFile(filePath, jsonData, (err) => {
         if (err) {
-          return res.status(500).json(err);
+          res.status(500).json(err);
         }
-        // res.redirect('/urls');
-        req.session.regenerate((err) => {
-          if (err) {
-            return next(err);
-          } else {
-            req.session.user = newUser;
-            req.session.save((err) => {
-              if (err) {
-                return next(err);
-              }
-              return res.send('Registration Successful');
-            });
-          }
-        });
       });
     });
+
+    req.session.regenerate((err) => {
+      if (err) next(err);
+      console.log('here', req.session);
+      req.session.user = newUser[uuid].id;
+
+      console.log('get session user', req.session.user);
+
+      req.session.save((err) => {
+        if (err) {
+          console.log('err');
+          return next(err);
+        }
+        // res.send('Registration Successful');
+        console.log('save: ', req.session.user);
+        res.redirect('/auth/login');
+      });
+    });
+
+    // Object.assign(authJson, newUser);
+    // authJson.push(newUser); // Push the new user to your user data
+
+    // Store the user's ID in the session
+
+    // res.render('/urls');
   }
 };
