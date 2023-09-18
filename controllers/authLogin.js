@@ -7,7 +7,7 @@ const filePath = path.join(path.resolve(), '/models/users.json');
 export const loginUser = (req, res) => {
   // Authenticate the user here, e.g., by checking credentials in a database
   const { email, password } = req.body;
-  console.log('inputed : ', req.body);
+
   if (email === '' || password === '') {
     return res.send('Please fill in all fields');
   } else {
@@ -18,6 +18,8 @@ export const loginUser = (req, res) => {
         password: '',
       },
     };
+
+    console.log('loginId: ', loginId);
     readWriteFile(filePath, (err, jsonData) => {
       if (err) {
         return res.status(500).json(err);
@@ -27,17 +29,17 @@ export const loginUser = (req, res) => {
         jsonData = {};
       }
       const jsonDataArr = Object.values(jsonData);
-      console.log('jsonDataArr: ', jsonDataArr);
 
       const user = jsonDataArr.find(
         (user) => user.email === email && user.password === password,
       );
 
       if (user) {
+        // if email and password params match an existing user:
         req.session.regenerate((err) => {
           if (err) next(err);
           console.log('here login', req.session);
-          req.session.user = loginId[uuid].id;
+          req.session.user = user.id;
 
           console.log('get login session user', req.session.user);
 
@@ -52,9 +54,9 @@ export const loginUser = (req, res) => {
           });
         });
       } else {
-        res.send('login failed');
+        //if email or password params don't match an existing user:
+        res.render('login');
       }
     });
-    //session
   }
 };

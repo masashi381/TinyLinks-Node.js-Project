@@ -1,14 +1,16 @@
 import express from 'express';
 import session from 'express-session';
+import path from 'path';
 
 import { loginUser } from '../controllers/authLogin.js';
 import { registeredNewUsers } from '../controllers/authControllers.js';
+import { logout } from '../controllers/authLogout.js';
 const authRouter = express.Router();
 
 // Session configuration
 authRouter.use(
   session({
-    secret: 'secret', // Replace with a strong secret, preferably from an environment variable
+    secret: 'secret',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
@@ -18,36 +20,42 @@ authRouter.use(
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
-// Create a new user with a UUID (Replace this with database logic)
-
-// Mock user data (Replace this with a database)
-
 // Middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-  console.log('user', req.session.user);
-  if (req.session.user) {
-    next();
-  } else {
-    res.redirect('/auth/login');
-    // next();
-  }
-};
+// export const isAuthenticated = (req, res, next) => {
+//   console.log('user', req.session.user);
+//   if (req.session.user) {
+//     console.log('middleware is working');
+//     next();
+//   } else {
+//     res.render('login');
+//     // next();
+//   }
+// };
 
 // Show login page
-authRouter.get('/login', isAuthenticated, (req, res) => {
+authRouter.get('/', (req, res) => {
   // res.send(`hello ${req.session.user}`);
+  res.redirect('/urls');
+});
+
+authRouter.get('/login', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/urls');
+  }
   res.render('login');
+});
+
+// Show register page
+authRouter.get('/register', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/urls');
+  }
+  res.render('register');
 });
 
 // Handle login
 authRouter.post('/login', (req, res) => {
   loginUser(req, res);
-});
-
-// Show register page
-authRouter.get('/register', (req, res) => {
-  // res.send('Register Page');
-  res.render('register');
 });
 
 // Handle registration
@@ -56,13 +64,14 @@ authRouter.post('/register', (req, res) => {
 });
 
 // Logout
-authRouter.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Error destroying session:', err);
-    }
-    res.redirect('/login');
-  });
+authRouter.post('/logout', (req, res) => {
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     console.error('Error destroying session:', err);
+  //   }
+  //   res.redirect('/login');
+  // });
+  logout(req, res);
 });
 
 export default authRouter;
