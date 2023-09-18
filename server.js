@@ -3,7 +3,6 @@ import path from 'path';
 import fs from 'fs';
 import urlRouter from './routes/urls.js';
 import authRoute from './routes/auth.js';
-import cookieParser from 'cookie-parser';
 import session from 'express-session';
 // import isAuthenticated from './routes/auth.js';
 
@@ -15,8 +14,6 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 // server.use(express.static('public'));
 
-// server.use(cookieParser());
-
 server.use(
   session({
     secret: 'secret',
@@ -27,17 +24,8 @@ server.use(
 );
 
 server.get('/', (req, res) => {
-  console.log(req.session.user);
-  // const userId = req.cookies.userid;
-  //DO NOT DELETE ↓
-  // if (!userId) {
-  //   return res.redirect('/login');
-  // }
-  // console.log('here');
-  // res.redirect('/urls');
   if (req.session.user) {
-    res.redirect('/urls');
-    // res.render('urls');
+    return res.redirect('/urls');
   }
   res.render('login');
 });

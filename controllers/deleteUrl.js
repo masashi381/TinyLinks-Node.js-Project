@@ -3,9 +3,7 @@ import { readWriteFile, writeToFile } from '../helpers/utils.js';
 
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
-export const deleteUrl = (req, res) => {
-  // const userId = req.cookies.userId;
-  const userId = '12345667';
+export const deleteUrl = (req, res, userId) => {
   const itemId = req.params.id;
 
   readWriteFile(filePath, (err, jsonData) => {

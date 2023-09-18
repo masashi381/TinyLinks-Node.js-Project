@@ -39,6 +39,7 @@ export const createUrl = (req, res, userId) => {
       res.redirect(`/urls/${shortUrl}`);
     });
   });
+  res.redirect(`/urls/${shortUrl}`);
 };
 
 export const updateUrl = (req, res, userId) => {
