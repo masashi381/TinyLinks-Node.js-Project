@@ -1,9 +1,8 @@
 import express from 'express';
 import path from 'path';
-import fs from 'fs';
 import urlRouter from './routes/urls.js';
 import authRoute from './routes/auth.js';
-import cookieParser from 'cookie-parser';
+// import cookieParser from 'cookie-parser';
 import session from 'express-session';
 // import isAuthenticated from './routes/auth.js';
 
@@ -15,7 +14,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 // server.use(express.static('public'));
 
-server.use(cookieParser());
+// server.use(cookieParser());
 
 server.use(
   session({
@@ -27,6 +26,7 @@ server.use(
 );
 
 server.get('/', (req, res) => {
+  console.log('localhost:3000', req.session.user);
   // const userId = req.cookies.userid;
   //DO NOT DELETE ↓
   // if (!userId) {
@@ -36,9 +36,10 @@ server.get('/', (req, res) => {
   // res.redirect('/urls');
   if (req.session.user) {
     res.redirect('/urls');
+    return;
     // res.render('urls');
   }
-  res.render('login');
+  res.redirect('/auth/login');
 });
 
 server.use('/urls', urlRouter);
