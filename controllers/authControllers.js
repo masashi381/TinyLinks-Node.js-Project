@@ -66,7 +66,7 @@ export const registeredNewUsers = (req, res) => {
         if (err) next(err);
         console.log('here', req.session);
         console.log('sessionId', req.sessionID);
-        req.session.user = newUser[uuid].id;
+        req.session.user = newUser.id;
 
         console.log('get session user', req.session.user);
 

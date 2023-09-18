@@ -15,7 +15,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 // server.use(express.static('public'));
 
-server.use(cookieParser());
+// server.use(cookieParser());
 
 server.use(
   session({
@@ -27,6 +27,7 @@ server.use(
 );
 
 server.get('/', (req, res) => {
+  console.log(req.session.user);
   // const userId = req.cookies.userid;
   //DO NOT DELETE ↓
   // if (!userId) {

@@ -34,11 +34,13 @@ authRouter.use(express.urlencoded({ extended: true }));
 
 // Show login page
 authRouter.get('/', (req, res) => {
+  console.log(req.session.user);
   // res.send(`hello ${req.session.user}`);
   res.redirect('/urls');
 });
 
 authRouter.get('/login', (req, res) => {
+  console.log(req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
   }
@@ -47,6 +49,7 @@ authRouter.get('/login', (req, res) => {
 
 // Show register page
 authRouter.get('/register', (req, res) => {
+  console.log(req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
   }
