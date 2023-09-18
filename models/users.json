@@ -27,5 +27,11 @@
     "name": "michiru",
     "email": "michiru@gmail.com",
     "password": "michiru"
+  },
+  "3a07d0f6-5980-4fd8-9a77-087bd696cd26": {
+    "id": "3a07d0f6-5980-4fd8-9a77-087bd696cd26",
+    "name": "taiki",
+    "email": "taiki@gmail.com",
+    "password": "1111"
   }
 }

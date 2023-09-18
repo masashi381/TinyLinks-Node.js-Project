@@ -20,7 +20,7 @@ urlRouter.use((req, res, next) => {
 urlRouter.get('/', (req, res) => {
   getUrls(req, res, req.userId);
   console.log('urls', req.session.user);
-  getUrls(req, res);
+  // getUrls(req, res);
 });
 
 //show create new URL page
