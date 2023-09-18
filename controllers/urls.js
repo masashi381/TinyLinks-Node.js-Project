@@ -7,7 +7,6 @@ const filePath = path.join(path.resolve(), '/models/urls.json');
 
 export const createUrl = (req, res, userId) => {
   const { longUrl } = req.body;
-  // const userId = '12345667';
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
@@ -39,13 +38,11 @@ export const createUrl = (req, res, userId) => {
       res.redirect(`/urls/${shortUrl}`);
     });
   });
-  res.redirect(`/urls/${shortUrl}`);
 };
 
 export const updateUrl = (req, res, userId) => {
   const { longUrl } = req.body;
   const shortUrl = req.params.id;
-  // const userId = '12345667';
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
@@ -80,7 +77,6 @@ export const updateUrl = (req, res, userId) => {
 
 export const getUrl = (req, res, userId) => {
   const shortUrl = req.params.id;
-  // const userId = '12345667';
 
   readWriteFile(filePath, (err, jsonData) => {
     const userUrls = jsonData[userId] || [];

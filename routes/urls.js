@@ -7,7 +7,6 @@ import { deleteUrl } from '../controllers/deleteUrl.js';
 const urlRouter = express.Router();
 
 urlRouter.use((req, res, next) => {
-  console.log(req.session);
   if (!req.session.user) {
     return res.render('error', {
       errorMessage: 'you need to login first!',
