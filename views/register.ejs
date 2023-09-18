@@ -34,6 +34,9 @@
           <label for="password">Password</label>
           <input type="password" name="password" />
         </div>
+        <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+        <p class="text-danger"><%= errorMessage %></p>
+        <% } %>
         <button type="submit">Register</button>
       </form>
     </main>

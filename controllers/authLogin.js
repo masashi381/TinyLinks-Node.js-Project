@@ -9,7 +9,9 @@ export const loginUser = (req, res) => {
   const { email, password } = req.body;
 
   if (email === '' || password === '') {
-    return res.send('Please fill in all fields');
+    res.render('login', {
+      errorMessage: 'Please fill in all fields',
+    });
   } else {
     const loginId = {
       [uuid]: {
@@ -55,7 +57,9 @@ export const loginUser = (req, res) => {
         });
       } else {
         //if email or password params don't match an existing user:
-        res.render('login');
+        res.render('login', {
+          errorMessage: 'Incorrect email or password',
+        });
       }
     });
   }
