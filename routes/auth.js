@@ -20,35 +20,41 @@ authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
 // Middleware to check if the user is authenticated
-const isAuthenticated = (req, res, next) => {
-  console.log('user', req.session.user);
-  if (req.session.user) {
-    next();
-  } else {
-    res.rend('login');
-    // next();
-  }
-};
+// export const isAuthenticated = (req, res, next) => {
+//   console.log('user', req.session.user);
+//   if (req.session.user) {
+//     console.log('middleware is working');
+//     next();
+//   } else {
+//     res.render('login');
+//     // next();
+//   }
+// };
 
 // Show login page
-authRouter.get('/', isAuthenticated, (req, res) => {
+authRouter.get('/', (req, res) => {
   // res.send(`hello ${req.session.user}`);
   res.redirect('/urls');
 });
 
 authRouter.get('/login', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/urls');
+  }
   res.render('login');
+});
+
+// Show register page
+authRouter.get('/register', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/urls');
+  }
+  res.render('register');
 });
 
 // Handle login
 authRouter.post('/login', (req, res) => {
   loginUser(req, res);
-});
-
-// Show register page
-authRouter.get('/register', (req, res) => {
-  // res.send('Register Page');
-  res.render('register');
 });
 
 // Handle registration
@@ -57,7 +63,7 @@ authRouter.post('/register', (req, res) => {
 });
 
 // Logout
-authRouter.get('/logout', (req, res) => {
+authRouter.post('/logout', (req, res) => {
   // req.session.destroy((err) => {
   //   if (err) {
   //     console.error('Error destroying session:', err);

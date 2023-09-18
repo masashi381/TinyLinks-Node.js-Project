@@ -33,6 +33,7 @@ export const loginUser = (req, res) => {
       );
 
       if (user) {
+        // if email and password params match an existing user:
         req.session.regenerate((err) => {
           if (err) next(err);
           console.log('here login', req.session);
@@ -51,10 +52,9 @@ export const loginUser = (req, res) => {
           });
         });
       } else {
-        // res.send('login failed');
+        //if email or password params don't match an existing user:
         res.render('login');
       }
     });
-    //session
   }
 };

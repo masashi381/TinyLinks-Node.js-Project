@@ -1,5 +1,5 @@
 export const logout = (req, res) => {
-  req.session.user = null;
+  // req.session.user = null;
   req.session.save(function (err) {
     if (err) next(err);
 
@@ -7,13 +7,7 @@ export const logout = (req, res) => {
     // guard against forms of session fixation
     req.session.regenerate(function (err) {
       if (err) next(err);
-      res.redirect('/login');
+      res.redirect('/auth/login');
     });
   });
-  // req.session.destroy((err) => {
-  //   if (err) {
-  //     console.error('Error destroying session:', err);
-  //   }
-  //   res.redirect('/login');
-  // });
 };

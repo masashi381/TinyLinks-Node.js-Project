@@ -11,6 +11,7 @@ export const registeredNewUsers = (req, res) => {
   if (!name || !email || !password) {
     return res.send('Please fill in all fields');
   } else {
+    // set Duplicate
     const existedUsers = Object.values(data);
 
     let setDuplicate = false;
@@ -27,10 +28,9 @@ export const registeredNewUsers = (req, res) => {
     });
 
     if (setDuplicate) {
-      console.log('setDuplicate is ', setDuplicate);
-      res.send('This email is Duplicated');
+      console.log('This email is Duplicated');
+      res.render('register');
     } else {
-      console.log('setDuplicate is ', setDuplicate);
       // Create a new user with a UUID (Replace this with database logic)
       const newUser = {
         [uuid]: {
