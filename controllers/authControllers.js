@@ -9,7 +9,9 @@ export const registeredNewUsers = (req, res) => {
   const { name, email, password } = req.body;
   // Basic validation
   if (!name || !email || !password) {
-    return res.send('Please fill in all fields');
+    res.render('register', {
+      errorMessage: 'Please fill in all fields',
+    });
   } else {
     // set Duplicate
     const existedUsers = Object.values(data);
@@ -28,8 +30,9 @@ export const registeredNewUsers = (req, res) => {
     });
 
     if (setDuplicate) {
-      console.log('This email is Duplicated');
-      res.render('register');
+      res.render('register', {
+        errorMessage: 'Email already exists',
+      });
     } else {
       // Create a new user with a UUID (Replace this with database logic)
       const newUser = {
