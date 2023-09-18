@@ -1,35 +1,24 @@
 import express from 'express';
 import { createUrl, updateUrl, getUrl } from '../controllers/urls.js';
-// import cookieParser from 'cookie-parser';
 import { getUrls } from '../controllers/getUrls.js';
 import { checkUrlExsistance } from '../controllers/checkUrlExsistance.js';
 import { deleteUrl } from '../controllers/deleteUrl.js';
 import session from 'express-session';
 const urlRouter = express.Router();
 
-// urlRouter.use(cookieParser());
+urlRouter.use((req, res, next) => {
+  if (!req.session.user) {
+    return res.render('error', {
+      errorMessage: 'you need to login first!',
+    });
+  }
+  req.userId = req.session.user;
+  next();
+});
 
-// urlRouter.use((req, res, next) => {
-//   // const userId = req.cookies.userId;
-//   //DO NOT DELETE ↓
-//   // if (!userId) {
-//   //   return res.render('error', {
-//   //     errorMessage: 'you need to login first to see your URL list',
-//   //   });
-//   // }
-//   // console.log(userId);
-//   next();
-// });
-urlRouter.use(
-  session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
-  }),
-);
 //show my URLs page
 urlRouter.get('/', (req, res) => {
+  getUrls(req, res, req.userId);
   console.log('urls', req.session.user);
   getUrls(req, res);
 });
@@ -41,28 +30,27 @@ urlRouter.get('/new', (req, res) => {
 
 //submit new URL
 urlRouter.post('/', (req, res) => {
-  createUrl(req, res);
-});
-
-//show single URL page
-urlRouter.get('/:id', (req, res) => {
-  getUrl(req, res);
+  createUrl(req, res, req.userId);
 });
 
 //check if the shortend url exsits in json before jumping to the actual page
 urlRouter.get('/u/:id', (req, res) => {
-  checkUrlExsistance(req, res);
+  checkUrlExsistance(req, res, req.userId);
+});
+
+//show single URL page
+urlRouter.get('/:id', (req, res) => {
+  getUrl(req, res, req.userId);
 });
 
 //edit URL
 urlRouter.post('/:id', (req, res) => {
-  console.log('edited');
-  updateUrl(req, res);
+  updateUrl(req, res, req.userId);
 });
 
 //delete URL
 urlRouter.post('/:id/delete', (req, res) => {
-  deleteUrl(req, res);
+  deleteUrl(req, res, req.userId);
 });
 
 export default urlRouter;
