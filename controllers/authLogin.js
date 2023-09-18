@@ -7,7 +7,7 @@ const filePath = path.join(path.resolve(), '/models/users.json');
 export const loginUser = (req, res) => {
   // Authenticate the user here, e.g., by checking credentials in a database
   const { email, password } = req.body;
-  console.log('inputed : ', req.body);
+
   if (email === '' || password === '') {
     return res.send('Please fill in all fields');
   } else {
@@ -27,7 +27,6 @@ export const loginUser = (req, res) => {
         jsonData = {};
       }
       const jsonDataArr = Object.values(jsonData);
-      console.log('jsonDataArr: ', jsonDataArr);
 
       const user = jsonDataArr.find(
         (user) => user.email === email && user.password === password,
@@ -52,7 +51,8 @@ export const loginUser = (req, res) => {
           });
         });
       } else {
-        res.send('login failed');
+        // res.send('login failed');
+        res.render('login');
       }
     });
     //session

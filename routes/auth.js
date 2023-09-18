@@ -3,6 +3,7 @@ import session from 'express-session';
 
 import { loginUser } from '../controllers/authLogin.js';
 import { registeredNewUsers } from '../controllers/authControllers.js';
+import { logout } from '../controllers/authLogout.js';
 const authRouter = express.Router();
 
 // Session configuration
@@ -18,24 +19,24 @@ authRouter.use(
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
-// Create a new user with a UUID (Replace this with database logic)
-
-// Mock user data (Replace this with a database)
-
 // Middleware to check if the user is authenticated
 const isAuthenticated = (req, res, next) => {
   console.log('user', req.session.user);
   if (req.session.user) {
     next();
   } else {
-    res.redirect('/auth/login');
+    res.rend('login');
     // next();
   }
 };
 
 // Show login page
-authRouter.get('/login', isAuthenticated, (req, res) => {
+authRouter.get('/', isAuthenticated, (req, res) => {
   // res.send(`hello ${req.session.user}`);
+  res.redirect('/urls');
+});
+
+authRouter.get('/login', (req, res) => {
   res.render('login');
 });
 
@@ -57,12 +58,13 @@ authRouter.post('/register', (req, res) => {
 
 // Logout
 authRouter.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Error destroying session:', err);
-    }
-    res.redirect('/login');
-  });
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     console.error('Error destroying session:', err);
+  //   }
+  //   res.redirect('/login');
+  // });
+  logout(req, res);
 });
 
 export default authRouter;

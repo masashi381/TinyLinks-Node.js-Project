@@ -4,6 +4,7 @@ import fs from 'fs';
 import urlRouter from './routes/urls.js';
 import authRoute from './routes/auth.js';
 import cookieParser from 'cookie-parser';
+
 const server = express();
 
 server.set('view engine', 'ejs');
