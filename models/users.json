@@ -21,5 +21,11 @@
     "name": "ma",
     "email": "ma@gmail.com",
     "password": "3333"
+  },
+  "b2f463c5-3b3e-449d-b0bc-fa236487d94a": {
+    "id": "b2f463c5-3b3e-449d-b0bc-fa236487d94a",
+    "name": "masa",
+    "email": "masa@test.com",
+    "password": "111"
   }
 }
