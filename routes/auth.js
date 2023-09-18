@@ -1,6 +1,5 @@
 import express from 'express';
 import session from 'express-session';
-import path from 'path';
 
 import { loginUser } from '../controllers/authLogin.js';
 import { registeredNewUsers } from '../controllers/authControllers.js';
@@ -20,33 +19,18 @@ authRouter.use(
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
-// Middleware to check if the user is authenticated
-// export const isAuthenticated = (req, res, next) => {
-//   console.log('user', req.session.user);
-//   if (req.session.user) {
-//     console.log('middleware is working');
-//     next();
-//   } else {
-//     res.render('login');
-//     // next();
-//   }
-// };
-
-// Show login page
-authRouter.get('/', (req, res) => {
-  // res.send(`hello ${req.session.user}`);
-  res.redirect('/urls');
-});
-
 authRouter.get('/login', (req, res) => {
+  console.log(req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
   }
+  // console.log('test');
   res.render('login');
 });
 
 // Show register page
 authRouter.get('/register', (req, res) => {
+  console.log('register', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
   }
@@ -65,12 +49,6 @@ authRouter.post('/register', (req, res) => {
 
 // Logout
 authRouter.post('/logout', (req, res) => {
-  // req.session.destroy((err) => {
-  //   if (err) {
-  //     console.error('Error destroying session:', err);
-  //   }
-  //   res.redirect('/login');
-  // });
   logout(req, res);
 });
 
