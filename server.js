@@ -37,7 +37,6 @@ server.get('/', (req, res) => {
   if (req.session.user) {
     res.redirect('/urls');
     return;
-    // res.render('urls');
   }
   res.redirect('/auth/login');
 });
