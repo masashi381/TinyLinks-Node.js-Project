@@ -3,7 +3,7 @@ import { createUrl, updateUrl, getUrl } from '../controllers/urls.js';
 import { getUrls } from '../controllers/getUrls.js';
 import { checkUrlExsistance } from '../controllers/checkUrlExsistance.js';
 import { deleteUrl } from '../controllers/deleteUrl.js';
-
+import session from 'express-session';
 const urlRouter = express.Router();
 
 urlRouter.use((req, res, next) => {
@@ -19,6 +19,8 @@ urlRouter.use((req, res, next) => {
 //show my URLs page
 urlRouter.get('/', (req, res) => {
   getUrls(req, res, req.userId);
+  console.log('urls', req.session.user);
+  getUrls(req, res);
 });
 
 //show create new URL page

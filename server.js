@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import fs from 'fs';
 import urlRouter from './routes/urls.js';
 import authRoute from './routes/auth.js';
 import session from 'express-session';
@@ -24,10 +23,19 @@ server.use(
 );
 
 server.get('/', (req, res) => {
+  console.log('localhost:3000', req.session.user);
+  // const userId = req.cookies.userid;
+  //DO NOT DELETE ↓
+  // if (!userId) {
+  //   return res.redirect('/login');
+  // }
+  // console.log('here');
+  // res.redirect('/urls');
   if (req.session.user) {
-    return res.redirect('/urls');
+    res.redirect('/urls');
+    return;
   }
-  res.render('login');
+  res.redirect('/auth/login');
 });
 
 server.use('/urls', urlRouter);
