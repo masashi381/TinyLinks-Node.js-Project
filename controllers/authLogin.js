@@ -18,6 +18,8 @@ export const loginUser = (req, res) => {
         password: '',
       },
     };
+
+    console.log('loginId: ', loginId);
     readWriteFile(filePath, (err, jsonData) => {
       if (err) {
         return res.status(500).json(err);
@@ -37,7 +39,7 @@ export const loginUser = (req, res) => {
         req.session.regenerate((err) => {
           if (err) next(err);
           console.log('here login', req.session);
-          req.session.user = loginId[uuid].id;
+          req.session.user = user.id;
 
           console.log('get login session user', req.session.user);
 

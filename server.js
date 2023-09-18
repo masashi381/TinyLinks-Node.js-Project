@@ -19,7 +19,7 @@ server.use(cookieParser());
 
 server.use(
   session({
-    secret: 'secret', // Replace with a strong secret, preferably from an environment variable
+    secret: 'secret',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
@@ -36,8 +36,9 @@ server.get('/', (req, res) => {
   // res.redirect('/urls');
   if (req.session.user) {
     res.redirect('/urls');
+    // res.render('urls');
   }
-  res.redirect('/auth/login');
+  res.render('login');
 });
 
 server.use('/urls', urlRouter);

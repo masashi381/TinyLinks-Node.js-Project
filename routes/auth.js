@@ -1,5 +1,6 @@
 import express from 'express';
 import session from 'express-session';
+import path from 'path';
 
 import { loginUser } from '../controllers/authLogin.js';
 import { registeredNewUsers } from '../controllers/authControllers.js';
@@ -9,7 +10,7 @@ const authRouter = express.Router();
 // Session configuration
 authRouter.use(
   session({
-    secret: 'secret', // Replace with a strong secret, preferably from an environment variable
+    secret: 'secret',
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 24 * 60 * 60 * 1000 },
