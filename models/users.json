@@ -20,6 +20,12 @@
     "id": "70ecfc52-9934-4393-8cae-663d6aa81c54",
     "name": "masaki",
     "email": "masaki@gmail.com",
-    "password": "1111"
+    "password": "3333"
+  },
+  "1f8383e6-20da-4a53-8fd0-50433dfd2650": {
+    "id": "1f8383e6-20da-4a53-8fd0-50433dfd2650",
+    "name": "michiru",
+    "email": "michiru@gmail.com",
+    "password": "michiru"
   }
 }

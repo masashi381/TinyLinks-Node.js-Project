@@ -3,10 +3,8 @@ import { readWriteFile } from '../helpers/utils.js';
 
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
-export const checkUrlExsistance = (req, res) => {
+export const checkUrlExsistance = (req, res, userId) => {
   const urlId = req.params.id;
-  // const userId = req.cookies.userId;
-  const userId = '12345667';
 
   readWriteFile(filePath, (err, jsonData) => {
     if (err) {
