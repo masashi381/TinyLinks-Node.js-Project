@@ -7,14 +7,14 @@ import { logout } from '../controllers/authLogout.js';
 const authRouter = express.Router();
 
 // Session configuration
-authRouter.use(
-  session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
-  }),
-);
+// authRouter.use(
+//   session({
+//     secret: 'secret',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { maxAge: 24 * 60 * 60 * 1000 },
+//   }),
+// );
 
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
@@ -23,7 +23,7 @@ authRouter.get('/login', (req, res) => {
   console.log('get login', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.session.user }); //追加
+    res.render('urls', { name: req.session.name }); //追加
   }
   // console.log('test');
   res.render('login', { name: '' }); //追加
@@ -34,7 +34,7 @@ authRouter.get('/register', (req, res) => {
   console.log('register', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.session.user }); //追加
+    res.render('urls', { name: req.session.name }); //追加
   }
   res.render('register', { name: '' }); //追加
 });
