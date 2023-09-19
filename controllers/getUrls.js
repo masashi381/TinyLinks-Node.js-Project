@@ -12,7 +12,7 @@ export const getUrls = (req, res, userId, userName) => {
     if (!jsonData[userId]) {
       return res.redirect('/urls/new');
     }
-    console.log('getUrls', jsonData[userId]);
+
     res.render('urls', { data: jsonData[userId], name: userName /* 追加*/ });
   });
 };
