@@ -75,7 +75,7 @@ export const updateUrl = (req, res, userId) => {
   });
 };
 
-export const getUrl = (req, res, userId) => {
+export const getUrl = (req, res, userId, userName) => {
   const shortUrl = req.params.id;
 
   readWriteFile(filePath, (err, jsonData) => {
@@ -84,11 +84,13 @@ export const getUrl = (req, res, userId) => {
     if (urlIndex === -1) {
       return res.status(404).render('error', {
         errorMessage: 'URL not found',
+        name: '', // 追加
       });
     }
     res.render('singleUrl', {
       id: req.params.id,
       longUrl: userUrls[urlIndex].longUrl,
+      name: userName, // 追加
     });
   });
 };

@@ -11,6 +11,7 @@ export const loginUser = (req, res) => {
   if (email === '' || password === '') {
     res.render('login', {
       errorMessage: 'Please fill in all fields',
+      name: '', //追加
     });
   } else {
     const loginId = {
@@ -40,8 +41,9 @@ export const loginUser = (req, res) => {
         // if email and password params match an existing user:
         req.session.regenerate((err) => {
           if (err) next(err);
-          console.log('here login', req.session);
+          console.log('here login', user);
           req.session.user = user.id;
+          req.session.name = user.name;
 
           console.log('get login session user', req.session.user);
 
@@ -59,6 +61,7 @@ export const loginUser = (req, res) => {
         //if email or password params don't match an existing user:
         res.render('login', {
           errorMessage: 'Incorrect email or password',
+          name: '',
         });
       }
     });

@@ -1,8 +1,6 @@
 import path from 'path';
 import { readWriteFile, writeToFile } from '../helpers/utils.js';
 import { uuid } from '../helpers/users.js';
-import data from '../models/users.json' assert { type: 'json' };
-import { execSync } from 'child_process';
 const filePath = path.join(path.resolve(), '/models/users.json');
 
 export const registeredNewUsers = (req, res) => {
@@ -11,6 +9,7 @@ export const registeredNewUsers = (req, res) => {
   if (!name || !email || !password) {
     res.render('register', {
       errorMessage: 'Please fill in all fields',
+      name: '', // 追加
     });
   } else {
     readWriteFile(filePath, (err, jsonData) => {
@@ -25,6 +24,7 @@ export const registeredNewUsers = (req, res) => {
       // set Duplicate
 
       const existedUsers = Object.values(jsonData);
+
       let setDuplicate = false;
 
       function findDuplicateEmail(data, i) {
@@ -42,6 +42,7 @@ export const registeredNewUsers = (req, res) => {
       if (setDuplicate) {
         res.render('register', {
           errorMessage: 'Email already exists',
+          name: '', // 追加
         });
       } else {
         // Create a new user with a UUID (Replace this with database logic)
@@ -60,23 +61,29 @@ export const registeredNewUsers = (req, res) => {
 
         writeToFile(filePath, jsonData, (err) => {
           if (err) {
-            res.status(500).json(err);
+            return res.status(500).json(err);
           }
-        });
-        req.session.regenerate((err) => {
-          if (err) next(err);
-          // console.log('here', req.session);
 
-          req.session.user = newUser.id;
-
-          console.log('get session user', req.session.user);
-
-          req.session.save((err) => {
+          req.session.regenerate((err) => {
             if (err) {
               return next(err);
             }
-            console.log('save: ', req.session.user);
-            res.redirect('/urls');
+            // const addUsers = Object.values(jsonData);
+
+            // console.log('addUsers: ', addUsers);
+
+            req.session.user = newUser[uuid].id;
+            req.session.name = newUser[uuid].name;
+
+            console.log('get session user', req.session.user);
+
+            req.session.save((err) => {
+              if (err) {
+                return next(err);
+              }
+              console.log('save: ', req.session.user);
+              res.redirect('/urls');
+            });
           });
         });
       }

@@ -1,31 +1,20 @@
 import express from 'express';
-import session from 'express-session';
 
 import { loginUser } from '../controllers/authLogin.js';
 import { registeredNewUsers } from '../controllers/authControllers.js';
 import { logout } from '../controllers/authLogout.js';
 const authRouter = express.Router();
 
-// Session configuration
-authRouter.use(
-  session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 24 * 60 * 60 * 1000 },
-  }),
-);
-
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
 authRouter.get('/login', (req, res) => {
-  console.log(req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
+    res.render('urls', { name: req.session.name });
   }
-  // console.log('test');
-  res.render('login');
+
+  res.render('login', { name: '' });
 });
 
 // Show register page
@@ -33,8 +22,9 @@ authRouter.get('/register', (req, res) => {
   console.log('register', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
+    res.render('urls', { name: req.session.name }); //追加
   }
-  res.render('register');
+  res.render('register', { name: '' }); //追加
 });
 
 // Handle login

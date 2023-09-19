@@ -25,6 +25,7 @@ export const deleteUrl = (req, res, userId) => {
     if (deleteItemIndex === -1) {
       return res.render('error', {
         errorMessage: 'Cannnot find URL you wish to delete..',
+        name: '', //追加
       });
     }
 

@@ -1,1 +1,7 @@
-{"gjiodgioasf":{"id":"gjiodgioasf","email":"test@test.com","password":"1234"},"07aa7d50-3de7-491a-9839-13534eb5c714":{"id":"07aa7d50-3de7-491a-9839-13534eb5c714","name":"masa","email":"masa@gmail.com","password":"1111"},"bb8f89c3-f87e-4473-a0ac-77a6659edc19":{"id":"bb8f89c3-f87e-4473-a0ac-77a6659edc19","name":"test","email":"ma@gmail.com","password":"1111"},"70ecfc52-9934-4393-8cae-663d6aa81c54":{"id":"70ecfc52-9934-4393-8cae-663d6aa81c54","name":"masaki","email":"masaki@gmail.com","password":"3333"},"1f8383e6-20da-4a53-8fd0-50433dfd2650":{"id":"1f8383e6-20da-4a53-8fd0-50433dfd2650","name":"michiru","email":"michiru@gmail.com","password":"michiru"},"3a07d0f6-5980-4fd8-9a77-087bd696cd26":{"id":"3a07d0f6-5980-4fd8-9a77-087bd696cd26","name":"taiki","email":"taiki@gmail.com","password":"1111"},"d75b65b0-a901-4b86-9f91-4473f56ed799":{"id":"d75b65b0-a901-4b86-9f91-4473f56ed799","name":"kevin","email":"kevin@gmail.com","password":"1111"}}
+{
+  "gjiodgioasf": {
+    "id": "gjiodgioasf",
+    "email": "test@test.com",
+    "password": "1234"
+  }
+}

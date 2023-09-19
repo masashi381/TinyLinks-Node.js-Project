@@ -3,7 +3,7 @@ import { readWriteFile } from '../helpers/utils.js';
 
 const filePath = path.join(path.resolve(), '/models/urls.json');
 
-export const getUrls = (req, res, userId) => {
+export const getUrls = (req, res, userId, userName) => {
   readWriteFile(filePath, (err, jsonData) => {
     if (err) {
       return res.status(500).json(err);
@@ -12,7 +12,7 @@ export const getUrls = (req, res, userId) => {
     if (!jsonData[userId]) {
       return res.redirect('/urls/new');
     }
-
-    res.render('urls', { data: jsonData[userId] });
+    console.log('getUrls', jsonData[userId]);
+    res.render('urls', { data: jsonData[userId], name: userName /* 追加*/ });
   });
 };
