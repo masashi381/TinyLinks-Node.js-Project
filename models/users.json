@@ -1,1 +1,7 @@
-{"gjiodgioasf":{"id":"gjiodgioasf","email":"test@test.com","password":"1234"},"d3d0f3cf-a91a-4a35-abbc-b874be8eef85":{"id":"d3d0f3cf-a91a-4a35-abbc-b874be8eef85","name":"masashi","email":"masashi@gmail.com","password":"1111"},"947d6795-1457-4805-ab25-719b949fd819":{"id":"947d6795-1457-4805-ab25-719b949fd819","name":"hisa","email":"hisa@gmail.com","password":"2222"}}
+{
+  "gjiodgioasf": {
+    "id": "gjiodgioasf",
+    "email": "test@test.com",
+    "password": "1234"
+  }
+}

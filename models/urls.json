@@ -1,1 +1,7 @@
-{"12345667":[{"shortUrl":"DKCz0d","longUrl":"http://facebook.com"},{"shortUrl":"mjOXLT","longUrl":"http://google.com"},{"shortUrl":"bJ4Vc4","longUrl":"http://ciccc.ca"}],"947d6795-1457-4805-ab25-719b949fd819":[{"shortUrl":"5MjxwA","longUrl":"https://qiita.com/yuta-katayama-23/items/4ea30b13e8002853402b"}]}
+{
+  "12345667": [
+    { "shortUrl": "DKCz0d", "longUrl": "http://facebook.com" },
+    { "shortUrl": "mjOXLT", "longUrl": "http://google.com" },
+    { "shortUrl": "bJ4Vc4", "longUrl": "http://ciccc.ca" }
+  ]
+}
