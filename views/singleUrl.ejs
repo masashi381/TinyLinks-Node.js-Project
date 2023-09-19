@@ -21,13 +21,7 @@
       </div>
       <div>
         <h5>Edit</h5>
-        <form
-          method="post"
-          action="/urls/<%= id %> "
-          onsubmit="
-            return validateForm();
-          "
-        >
+        <form method="post" action="/urls/<%= id %> ">
           <label for="updatedUrl">New URL:</label>
           <input
             type="text"
@@ -35,28 +29,15 @@
             name="longUrl"
             placeholder="Input the new URL"
           />
+          <input type="hidden" name="oldLongUrl" value="<%= longUrl %>" />
           <button type="submit" class="btn btn-primary">Edit</button>
         </form>
       </div>
+      <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+      <p class="text-danger"><%= errorMessage %></p>
+      <% } %>
       <div class="card-footer text-muted"></div>
     </div>
-    <script>
-      function validateForm() {
-        const longUrl = document.getElementById('longUrl').value;
-        const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:\.]+$/;
-        if (longUrl === '') {
-          alert('Please enter a URL.');
-          return false;
-        }
-
-        if (!urlPattern.test(longUrl)) {
-          alert('Please enter a valid URL.');
-          return false;
-        }
-
-        return true;
-      }
-    </script>
     <!-- Bootstrap JS -->
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

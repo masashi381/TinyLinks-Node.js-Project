@@ -10,7 +10,7 @@ export const createUrl = (req, res, userId) => {
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
-    return res.status(400).render('error', {
+    return res.render('newUrl', {
       errorMessage: validationResult.error,
     });
   }
@@ -41,12 +41,14 @@ export const createUrl = (req, res, userId) => {
 };
 
 export const updateUrl = (req, res, userId) => {
-  const { longUrl } = req.body;
+  const { oldLongUrl, longUrl } = req.body;
   const shortUrl = req.params.id;
 
   const validationResult = validateUrl(longUrl);
   if (!validationResult.valid) {
-    return res.status(400).render('error', {
+    return res.status(400).render('singleUrl', {
+      id: req.params.id,
+      longUrl: oldLongUrl,
       errorMessage: validationResult.error,
     });
   }

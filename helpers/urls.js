@@ -3,7 +3,7 @@ import { readWriteFile } from './utils.js';
 
 export const validateUrl = (longUrl) => {
   if (!longUrl) {
-    return { valid: false, error: 'longUrl are required' };
+    return { valid: false, error: 'URL are required' };
   }
 
   const urlPattern = /^(http(s)?:\/\/)(www\.)?[\w-\/?:\.]+$/;
