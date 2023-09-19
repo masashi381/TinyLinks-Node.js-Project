@@ -13,6 +13,6 @@ export const getUrls = (req, res, userId) => {
       return res.redirect('/urls/new');
     }
 
-    res.render('urls', { data: jsonData[userId] });
+    res.render('urls', { data: jsonData[userId], name: userId /* 追加*/ });
   });
 };

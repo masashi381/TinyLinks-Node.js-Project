@@ -20,12 +20,13 @@ authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
 authRouter.get('/login', (req, res) => {
-  console.log(req.session.user);
+  console.log('get login', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
+    res.render('urls', { name: req.session.user }); //追加
   }
   // console.log('test');
-  res.render('login');
+  res.render('login', { name: '' }); //追加
 });
 
 // Show register page
@@ -33,8 +34,9 @@ authRouter.get('/register', (req, res) => {
   console.log('register', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
+    res.render('urls', { name: req.session.user }); //追加
   }
-  res.render('register');
+  res.render('register', { name: '' }); //追加
 });
 
 // Handle login

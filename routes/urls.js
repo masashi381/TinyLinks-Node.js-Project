@@ -3,7 +3,6 @@ import { createUrl, updateUrl, getUrl } from '../controllers/urls.js';
 import { getUrls } from '../controllers/getUrls.js';
 import { checkUrlExsistance } from '../controllers/checkUrlExsistance.js';
 import { deleteUrl } from '../controllers/deleteUrl.js';
-import session from 'express-session';
 const urlRouter = express.Router();
 
 urlRouter.use((req, res, next) => {
@@ -24,7 +23,7 @@ urlRouter.get('/', (req, res) => {
 
 //show create new URL page
 urlRouter.get('/new', (req, res) => {
-  res.render('newUrl');
+  res.render('newUrl', { name: '' });
 });
 
 //submit new URL

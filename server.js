@@ -3,7 +3,6 @@ import path from 'path';
 import urlRouter from './routes/urls.js';
 import authRoute from './routes/auth.js';
 import session from 'express-session';
-// import isAuthenticated from './routes/auth.js';
 
 const server = express();
 
@@ -33,6 +32,7 @@ server.get('/', (req, res) => {
   // res.redirect('/urls');
   if (req.session.user) {
     res.redirect('/urls');
+    res.render('urls', { name: req.session.user }); //追加
     return;
   }
   res.redirect('/auth/login');
