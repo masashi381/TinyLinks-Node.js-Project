@@ -12,6 +12,11 @@ export const getUrls = (req, res, userId, userName) => {
     if (!jsonData[userId]) {
       return res.redirect('/urls/new');
     }
+<<<<<<< HEAD
     res.render('urls', { data: jsonData[userId], name: userName });
+=======
+
+    res.render('urls', { data: jsonData[userId], name: userName /* 追加*/ });
+>>>>>>> main
   });
 };

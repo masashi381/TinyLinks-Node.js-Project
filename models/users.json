@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "gjiodgioasf": {
     "id": "gjiodgioasf",
@@ -11,3 +12,6 @@
     "password": "1111"
   }
 }
+=======
+{"gjiodgioasf":{"id":"gjiodgioasf","email":"test@test.com","password":"1234"},"6ff252cb-a7c0-475a-9cc7-4dbb9b86f31b":{"id":"6ff252cb-a7c0-475a-9cc7-4dbb9b86f31b","name":"masa","email":"masa@gmail.com","password":"1111"}}
+>>>>>>> main
