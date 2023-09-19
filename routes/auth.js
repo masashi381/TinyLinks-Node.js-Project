@@ -19,7 +19,6 @@ authRouter.get('/login', (req, res) => {
 
 // Show register page
 authRouter.get('/register', (req, res) => {
-  console.log('register', req.session.user);
   if (req.session.user) {
     res.redirect('/urls');
     res.render('urls', { name: req.session.name }); //追加

@@ -3,5 +3,11 @@
     "id": "gjiodgioasf",
     "email": "test@test.com",
     "password": "1234"
+  },
+  "9fd03cfc-aa7f-4544-94e3-aafba2c1a8f8": {
+    "id": "9fd03cfc-aa7f-4544-94e3-aafba2c1a8f8",
+    "name": "masa",
+    "email": "masa@gmail.com",
+    "password": "1111"
   }
 }

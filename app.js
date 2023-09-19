@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import server from './server.js';
 
-//envファイル用
+//env file
 dotenv.config();
 
 const HOST = 'localhost';

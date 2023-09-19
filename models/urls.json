@@ -3,5 +3,11 @@
     { "shortUrl": "DKCz0d", "longUrl": "http://facebook.com" },
     { "shortUrl": "mjOXLT", "longUrl": "http://google.com" },
     { "shortUrl": "bJ4Vc4", "longUrl": "http://ciccc.ca" }
+  ],
+  "9fd03cfc-aa7f-4544-94e3-aafba2c1a8f8": [
+    {
+      "shortUrl": "6HCZag",
+      "longUrl": "https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application"
+    }
   ]
 }
