@@ -16,12 +16,12 @@ export const checkUrlExsistance = (req, res, userId) => {
         errorMessage: `Cannot find user ${userId}`,
       });
     }
-    const exsistUrl = data.find((data) => data.shortUrl === urlId);
-    if (!exsistUrl) {
+    const existUrl = data.find((data) => data.shortUrl === urlId);
+    if (!existUrl) {
       return res.render('error', {
-        errorMessage: "This shorten URL doesn't exsist!",
+        errorMessage: "This shorten URL doesn't exist!",
       });
     }
-    res.redirect(exsistUrl.longUrl);
+    res.redirect(existUrl.longUrl);
   });
 };

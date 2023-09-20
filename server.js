@@ -11,6 +11,7 @@ server.set('views', path.join(path.resolve(), 'views'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+//session configuration
 server.use(
   session({
     secret: 'secret',
@@ -21,11 +22,9 @@ server.use(
 );
 
 server.get('/', (req, res) => {
-  console.log('localhost:3000', req.session.user);
-
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.session.name }); //追加
+    res.render('urls', { name: req.session.name });
     return;
   }
   res.redirect('/auth/login');

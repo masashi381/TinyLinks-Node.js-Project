@@ -15,7 +15,7 @@ export const deleteUrl = (req, res, userId) => {
     const data = jsonData[userId];
 
     if (!data) {
-      return res.send("item doesn't exsist");
+      return res.send("item doesn't exist");
     }
 
     // find index of deleting item
@@ -25,7 +25,7 @@ export const deleteUrl = (req, res, userId) => {
     if (deleteItemIndex === -1) {
       return res.render('error', {
         errorMessage: 'Cannnot find URL you wish to delete..',
-        name: '', //追加
+        name: '',
       });
     }
 

@@ -1,5 +1,4 @@
 export const logout = (req, res) => {
-  // req.session.user = null;
   req.session.save(function (err) {
     if (err) next(err);
 

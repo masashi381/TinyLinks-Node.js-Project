@@ -9,7 +9,7 @@ export const registeredNewUsers = (req, res) => {
   if (!name || !email || !password) {
     res.render('register', {
       errorMessage: 'Please fill in all fields',
-      name: '', // 追加
+      name: '',
     });
   } else {
     readWriteFile(filePath, (err, jsonData) => {
@@ -21,7 +21,7 @@ export const registeredNewUsers = (req, res) => {
         jsonData = {};
       }
 
-      // set Duplicate
+      // set Duplicate of email
 
       const existedUsers = Object.values(jsonData);
 
@@ -42,10 +42,10 @@ export const registeredNewUsers = (req, res) => {
       if (setDuplicate) {
         res.render('register', {
           errorMessage: 'Email already exists',
-          name: '', // 追加
+          name: '',
         });
       } else {
-        // Create a new user with a UUID (Replace this with database logic)
+        // Create a new user with a UUID
         const newUser = {
           [uuid]: {
             id: uuid,
@@ -54,8 +54,6 @@ export const registeredNewUsers = (req, res) => {
             password,
           },
         };
-
-        console.log('newUser: ', newUser);
 
         Object.assign(jsonData, newUser);
 
@@ -68,20 +66,13 @@ export const registeredNewUsers = (req, res) => {
             if (err) {
               return next(err);
             }
-            // const addUsers = Object.values(jsonData);
-
-            // console.log('addUsers: ', addUsers);
-
             req.session.user = newUser[uuid].id;
             req.session.name = newUser[uuid].name;
-
-            console.log('get session user', req.session.user);
 
             req.session.save((err) => {
               if (err) {
                 return next(err);
               }
-              console.log('save: ', req.session.user);
               res.redirect('/urls');
             });
           });
