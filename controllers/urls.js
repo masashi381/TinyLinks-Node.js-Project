@@ -12,6 +12,7 @@ export const createUrl = (req, res, userId) => {
   if (!validationResult.valid) {
     return res.render('newUrl', {
       errorMessage: validationResult.error,
+      name: req.userName,
     });
   }
 
@@ -50,6 +51,7 @@ export const updateUrl = (req, res, userId) => {
       id: req.params.id,
       longUrl: oldLongUrl,
       errorMessage: validationResult.error,
+      name: req.userName,
     });
   }
 

@@ -12,7 +12,7 @@ authRouter.use(express.urlencoded({ extended: true }));
 authRouter.get('/login', (req, res) => {
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.userName });
+    res.render('urls', { name: req.session.name });
   }
   res.render('login', { name: '' });
 });
@@ -21,7 +21,7 @@ authRouter.get('/login', (req, res) => {
 authRouter.get('/register', (req, res) => {
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.userName });
+    res.render('urls', { name: req.session.name });
   }
   res.render('register', { name: '' });
 });
