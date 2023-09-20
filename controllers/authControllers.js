@@ -1,9 +1,10 @@
 import path from 'path';
 import { readWriteFile, writeToFile } from '../helpers/utils.js';
-import { uuid } from '../helpers/users.js';
+import { v4 as uuidv4 } from 'uuid';
 const filePath = path.join(path.resolve(), '/models/users.json');
 
 export const registeredNewUsers = (req, res) => {
+  const uuid = uuidv4();
   const { name, email, password } = req.body;
   // Basic validation
   if (!name || !email || !password) {
