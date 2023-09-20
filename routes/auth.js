@@ -8,12 +8,12 @@ const authRouter = express.Router();
 authRouter.use(express.json());
 authRouter.use(express.urlencoded({ extended: true }));
 
+// Show login page
 authRouter.get('/login', (req, res) => {
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.session.name });
+    res.render('urls', { name: req.userName });
   }
-
   res.render('login', { name: '' });
 });
 
@@ -21,9 +21,9 @@ authRouter.get('/login', (req, res) => {
 authRouter.get('/register', (req, res) => {
   if (req.session.user) {
     res.redirect('/urls');
-    res.render('urls', { name: req.session.name }); //追加
+    res.render('urls', { name: req.userName });
   }
-  res.render('register', { name: '' }); //追加
+  res.render('register', { name: '' });
 });
 
 // Handle login

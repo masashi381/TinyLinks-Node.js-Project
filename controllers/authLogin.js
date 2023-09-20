@@ -1,6 +1,6 @@
 import path from 'path';
 import { readWriteFile } from '../helpers/utils.js';
-import { uuid } from '../helpers/users.js';
+
 const filePath = path.join(path.resolve(), '/models/users.json');
 
 // post login info
@@ -14,15 +14,6 @@ export const loginUser = (req, res) => {
       name: '',
     });
   } else {
-    const loginId = {
-      [uuid]: {
-        id: uuid,
-        email: '',
-        password: '',
-      },
-    };
-
-    console.log('loginId: ', loginId);
     readWriteFile(filePath, (err, jsonData) => {
       if (err) {
         return res.status(500).json(err);

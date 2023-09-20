@@ -11,6 +11,7 @@ server.set('views', path.join(path.resolve(), 'views'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
+//session configuration
 server.use(
   session({
     secret: 'secret',

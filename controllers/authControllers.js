@@ -66,7 +66,6 @@ export const registeredNewUsers = (req, res) => {
             if (err) {
               return next(err);
             }
-
             req.session.user = newUser[uuid].id;
             req.session.name = newUser[uuid].name;
 
