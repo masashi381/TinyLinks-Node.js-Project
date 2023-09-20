@@ -51,7 +51,7 @@ export const updateUrl = (req, res, userId) => {
       id: req.params.id,
       longUrl: oldLongUrl,
       errorMessage: validationResult.error,
-      name: userName,
+      name: req.userName,
     });
   }
 
