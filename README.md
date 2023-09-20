@@ -73,7 +73,6 @@ if a user is not logged in, the header shows:
 
 ### GET `/`
 
-cookieをチェック
 
 if user is logged in:
 
@@ -86,7 +85,6 @@ if user is not logged in:
 ### GET `/urls`
 
 if user is logged in:
-myURLsを見せる
 
 - returns HTML with:
   - the site header (see Display Requirements above)
@@ -107,7 +105,6 @@ if user is not logged in:
 ### GET `/urls/new`
 
 create URL
-URLを作る
 
 if user is logged in:
 
@@ -123,7 +120,6 @@ if user is not logged in:
 
 ### GET `/urls/:id`
 
-短くしたURLの詳細（一つだけ取ってくる）
 if user is logged in and owns the URL for the given ID:
 
 - returns HTML with:
@@ -175,7 +171,6 @@ if user is not logged in:
 
 ### PUT `/urls/:id`
 
-編集ボタンが押された時
 if user is logged in and owns the URL for the given ID:
 
 - updates the URL
@@ -220,8 +215,6 @@ if user is not logged in:
 
 ### GET `/register`
 
-ページにアクセス
-
 if user is logged in:
 
 - redirects to /urls
@@ -234,8 +227,6 @@ if user is not logged in:
   - a register button that makes a POST request to /register
 
 ### POST `/login`
-
-JSONと比較して認証
 
 if email and password params match an existing user:
 
