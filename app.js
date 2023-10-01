@@ -9,5 +9,3 @@ const HOST = 'localhost';
 server.listen(process.env.PORT, HOST, () =>
   console.log(`server running on HTTP://${HOST}:${process.env.PORT}`),
 );
-
-export default server;
